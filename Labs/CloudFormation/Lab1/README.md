@@ -64,7 +64,7 @@ Resources:
           exports.handler = async (event) => {
               return {
                   statusCode: 200,
-                  body: JSON.stringify({ message: "Hello from Lambda 13!" }),
+                  body: JSON.stringify({ message: "Hello from Lambda!" }),
               };
           };
       Timeout: 10
