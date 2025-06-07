@@ -15,10 +15,10 @@ IAM user with permissions: cloudformation:*, lambda:*, iam:PassRole, s3:*
 index.js
 
 exports.handler = async (event) => {
-return {
-statusCode: 200,
-body: JSON.stringify({ message: "Hello from Lambda!" }),
-};
+    return {
+        statusCode: 200,
+        body: JSON.stringify({ message: "Hello from Lambda!" }),
+    };
 };
 ```
 ### ✅ 3. CREATE CLOUDFORMATION TEMPLATE
