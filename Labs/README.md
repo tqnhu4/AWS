@@ -9,7 +9,7 @@ Instructions on deploying infrastructure as code using AWS CloudFormation. Topic
 - Deploying stacks via AWS CLI
 - Real-world examples (e.g., Lambda, VPC, EC2)
 
-[1.Deploy an AWS Lambda Function using AWS CloudFormation](./CloudFormation/Lab1/README.md)
+  1.[Deploy an AWS Lambda Function using AWS CloudFormation](./CloudFormation/Lab1/README.md)
 
 
 ## 📦 Amazon S3
