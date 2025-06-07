@@ -105,7 +105,7 @@ Step Description
 
 Update
 
-### METHOD 1: USE ZipFile DIRECTLY IN TEMPLATE (INLINE CODE)
+### USE ZipFile DIRECTLY IN TEMPLATE (INLINE CODE)
 If you are using Code.ZipFile in template.yaml (like the example above):
 
 🛠 Update as follows:
