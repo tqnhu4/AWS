@@ -87,6 +87,7 @@ You can check in AWS Console → Lambda → my-lambda-function, or run the follo
 ```bash
 aws lambda invoke --function-name my-lambda-function output.txt
 cat output.txt
+
 ```
 ### ✅ 6. DELETE STACK (if needed)
 ```bash
