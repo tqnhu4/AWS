@@ -11,7 +11,7 @@ Instructions on deploying infrastructure as code using AWS CloudFormation. Topic
 
 ## Table of Contents
 
-1.[Deploy an AWS Lambda Function using AWS CloudFormation](./CloudFormation/Lab1/README.md)
+- 1.[Deploy an AWS Lambda Function using AWS CloudFormation](./CloudFormation/Lab1/README.md)
 
 
 ## 📦 Amazon S3
@@ -29,7 +29,7 @@ Comprehensive guide to deploying web applications with AWS Elastic Beanstalk. To
 ## AWS SAM: Building Serverless Apps, Simplified
 
 ## Table of Contents
-1.[Building Your First Serverless API with SAM](./SAM/Lab1/README.md)
-1.[Building a CRUD API with DynamoDB Integration](./SAM/Lab2/README.md)
-1.[Custom Domains, CI/CD, and Layering with SAM](./SAM/Lab3/README.md)
+- 1.[Building Your First Serverless API with SAM](./SAM/Lab1/README.md)
+- 2.[Building a CRUD API with DynamoDB Integration](./SAM/Lab2/README.md)
+- 3.[Custom Domains, CI/CD, and Layering with SAM](./SAM/Lab3/README.md)
 
