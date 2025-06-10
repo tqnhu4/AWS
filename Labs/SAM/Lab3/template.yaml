@@ -1,0 +1,100 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: An advanced serverless Notes API with DynamoDB, Lambda Layer, and custom domain consideration.
+
+Parameters:
+  TableName:
+    Type: String
+    Default: AdvancedServerlessNotesTable
+    Description: Name of the DynamoDB table for notes
+  DomainName: # Parameter for your custom domain
+    Type: String
+    Description: Your custom domain name (e.g., api.example.com)
+    Default: 'api.yourdomain.com' # CHANGE THIS TO YOUR ACTUAL DOMAIN
+  BasePath: # Base path for your API
+    Type: String
+    Description: Base path for the custom domain (e.g., 'notes')
+    Default: 'notes'
+
+Resources:
+  NotesTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName: !Ref TableName
+      PrimaryKey:
+        Name: noteId
+        Type: String
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+
+  # Define the Lambda Layer
+  CommonUtilsLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: CommonUtilsPythonLayer
+      ContentUri: ./layers/common_utils/ # Path to your layer content
+      CompatibleRuntimes:
+        - python3.9
+      LicenseInfo: 'MIT' # Optional: license info
+      RetentionPolicy: Retain # Keep layer version after stack deletion
+
+  NotesFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: notes_handler/app.lambda_handler
+      Runtime: python3.9
+      CodeUri: ./notes_handler/
+      MemorySize: 128
+      Timeout: 10
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref NotesTable
+      Layers: # Attach the Lambda Layer to the function
+        - !Ref CommonUtilsLayer
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref NotesTable
+      Events:
+        CreateNoteApi:
+          Type: Api
+          Properties:
+            Path: /notes
+            Method: post
+        ListNotesApi:
+          Type: Api
+          Properties:
+            Path: /notes
+            Method: get
+        GetNoteByIdApi:
+          Type: Api
+          Properties:
+            Path: /notes/{noteId}
+            Method: get
+
+  # API Gateway Custom Domain Mapping (requires ACM certificate and Route 53 setup outside SAM)
+  ApiDomain:
+    Type: AWS::ApiGateway::DomainName
+    Properties:
+      DomainName: !Ref DomainName
+      RegionalCertificateArn: # ARN of your ACM certificate for the custom domain
+        Fn::ImportValue: YourACMCertificateArn # Assuming you export this from another stack or manual setup
+      EndpointConfiguration:
+        Types:
+          - REGIONAL
+
+  ApiMapping:
+    Type: AWS::ApiGateway::BasePathMapping
+    Properties:
+      DomainName: !Ref DomainName
+      RestApiId: !Ref ServerlessRestApi # Refers to the auto-created API Gateway
+      Stage: Prod # The stage name of your API
+      BasePath: !Ref BasePath # e.g., 'notes' so the URL becomes api.example.com/notes/your-path
+
+Outputs:
+  NotesApiUrl:
+    Description: "API Gateway endpoint URL (auto-generated)"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  CustomDomainUrl:
+    Description: "Custom Domain URL for Notes API (requires DNS setup)"
+    Value: !Sub "https://${DomainName}/${BasePath}"

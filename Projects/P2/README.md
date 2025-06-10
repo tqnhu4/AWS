@@ -1,0 +1,1 @@
+Manupulating AWS resources using CLI - Create two S3 buckets, Upload files in one bucket, Use CLI to copy from that bucket to the other ==>  [AWS CLI, S3]
