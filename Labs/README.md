@@ -9,7 +9,7 @@ Instructions on deploying infrastructure as code using AWS CloudFormation. Topic
 - Deploying stacks via AWS CLI
 - Real-world examples (e.g., Lambda, VPC, EC2)
 
-## Table of Contents
+### Table of Contents
 
 - [Deploy an AWS Lambda Function using AWS CloudFormation](./CloudFormation/Lab1/README.md)
 
@@ -29,7 +29,7 @@ Comprehensive guide to deploying web applications with AWS Elastic Beanstalk. To
 ## AWS SAM: Building Serverless Apps, Simplified
 AWS SAM (Serverless Application Model) is an open-source framework for building serverless applications on AWS. It uses simplified YAML syntax to define resources like Lambda, API Gateway, and DynamoDB. SAM CLI enables local development, testing, and deployment to AWS with ease.
 
-## Table of Contents
+### Table of Contents
 - [Building Your First Serverless API with SAM](./SAM/Lab1/README.md)
 - [Building a CRUD API with DynamoDB Integration](./SAM/Lab2/README.md)
 - [Custom Domains, CI/CD, and Layering with SAM](./SAM/Lab3/README.md)
