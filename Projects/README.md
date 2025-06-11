@@ -4,5 +4,5 @@ This repository contains guides and resources for various projects I'm undertaki
 
 ## Table of Contents
 
-- 1. [Deploy Wordpress server on EC2 ==> Tech stack: EC2, Linux, MySQL, IAM Security Groups](./P1/README.md)
-- 2. [Manupulating AWS resources using CLI - Create two S3 buckets, Upload files in one bucket, Use CLI to copy from that bucket to the other ==> AWS CLI, S3](./P2/README.md)
+- [Deploy Wordpress server on EC2 ==> Tech stack: EC2, Linux, MySQL, IAM Security Groups](./P1/README.md)
+- [Manupulating AWS resources using CLI - Create two S3 buckets, Upload files in one bucket, Use CLI to copy from that bucket to the other ==> AWS CLI, S3](./P2/README.md)
