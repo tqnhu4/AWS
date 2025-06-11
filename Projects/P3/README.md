@@ -1,0 +1,1 @@
+Packing up & Restoring EC2 Servers - create EC2 instance -> create a text file inside save some text.. Replicate the instance and observe the same text in the new instance.
