@@ -21,7 +21,7 @@ aws configure
 (You can generate access keys in the AWS Management Console under "My Security Credentials" -> "Access keys").
 
 ## Step-by-Step Guide
-## Step 1: Create Two S3 Buckets
+### Step 1: Create Two S3 Buckets
 We will create two S3 buckets. Remember that S3 bucket names must be globally unique. Choose names that are unlikely to be taken.
 
 Replace your-unique-bucket-name-1 and your-unique-bucket-name-2 with your desired unique bucket names.
@@ -34,7 +34,7 @@ aws s3 mb s3://your-unique-bucket-name-1
 aws s3 mb s3://your-unique-bucket-name-2
 ```
 
-## Explanation:
+#### Explanation:
 
 - aws s3: The main command for interacting with S3.
 
@@ -42,7 +42,7 @@ aws s3 mb s3://your-unique-bucket-name-2
 
 - s3://: Specifies the S3 protocol and the bucket name.
 
-## Step 2: Create a Sample File to Upload
+### Step 2: Create a Sample File to Upload
 Before uploading, let's create a simple text file on your local machine.
 
 ```text
@@ -64,7 +64,7 @@ echo "Another file for bucket 1." > another-file-1.txt
 
 ```
 
-## Step 3: Upload Files to the First Bucket
+### Step 3: Upload Files to the First Bucket
 Now, let's upload the sample-file-1.txt (and another-file-1.txt if you created it) to your first S3 bucket.
 
 ```text
@@ -76,7 +76,7 @@ aws s3 cp another-file-1.txt s3://your-unique-bucket-name-1/
 
 ```
 
-## Explanation:
+#### Explanation:
 
 - cp: Stands for "copy", used for copying local files to S3 or between S3 locations.
 
@@ -85,28 +85,28 @@ aws s3 cp another-file-1.txt s3://your-unique-bucket-name-1/
 - The second argument is the S3 destination (bucket name followed by a forward slash / if you want it in the root of the bucket).
 
 
-## Step 4: Verify Files in the First Bucket
+### Step 4: Verify Files in the First Bucket
 You can list the contents of your first bucket to confirm the files were uploaded successfully.
 
 ```text
 aws s3 ls s3://your-unique-bucket-name-1/
 ```
 
-## Explanation:
+#### Explanation:
 
 - ls: Stands for "list", used to list objects and common prefixes in an S3 bucket.
 
 
-## Step 5: Copy Files from the First Bucket to the Second Bucket
+### Step 5: Copy Files from the First Bucket to the Second Bucket
 Now, let's copy the files from your-unique-bucket-name-1 to your-unique-bucket-name-2 using the AWS CLI. We'll use the cp command again, but this time, both source and destination will be S3 paths.
 
-## Option A: Copying a specific file
+#### Option A: Copying a specific file
 
 ```text
 aws s3 cp s3://your-unique-bucket-name-1/sample-file-1.txt s3://your-unique-bucket-name-2/
 ```
 
-## Option B: Copying all files from one bucket to another (recursive)
+#### Option B: Copying all files from one bucket to another (recursive)
 
 This is often more efficient if you want to copy everything. The --recursive flag will copy all objects and subfolders.
 
@@ -114,7 +114,7 @@ This is often more efficient if you want to copy everything. The --recursive fla
 aws s3 cp s3://your-unique-bucket-name-1/ s3://your-unique-bucket-name-2/ --recursive
 ```
 
-## Explanation:
+#### Explanation:
 
 - cp: Used for copying.
 
@@ -124,7 +124,7 @@ aws s3 cp s3://your-unique-bucket-name-1/ s3://your-unique-bucket-name-2/ --recu
 
 - --recursive: This flag is crucial for copying all contents (objects and prefixes/folders) from the source to the destination.
 
-## Step 6: Verify Files in the Second Bucket
+### Step 6: Verify Files in the Second Bucket
 List the contents of your second bucket to ensure the files were copied correctly.
 
 ```text
@@ -133,7 +133,7 @@ aws s3 ls s3://your-unique-bucket-name-2/
 
 You should see sample-file-1.txt (and another-file-1.txt if you copied it) in the output.
 
-## Cleanup (Optional but Recommended)
+### Cleanup (Optional but Recommended)
 It's good practice to clean up resources you no longer need to avoid incurring costs.
 
 - 1.Delete files from both buckets:
@@ -159,6 +159,6 @@ aws s3 rm s3://your-unique-bucket-name-2/ --recursive
 aws s3 rb s3://your-unique-bucket-name-1
 aws s3 rb s3://your-unique-bucket-name-2
 ```
-### Explanation:
+#### Explanation:
 
 - rb: Stands for "remove bucket".
