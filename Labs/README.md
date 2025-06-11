@@ -27,6 +27,7 @@ Comprehensive guide to deploying web applications with AWS Elastic Beanstalk. To
 - Managing environments and auto scaling
 
 ## AWS SAM: Building Serverless Apps, Simplified
+AWS SAM (Serverless Application Model) is an open-source framework for building serverless applications on AWS. It uses simplified YAML syntax to define resources like Lambda, API Gateway, and DynamoDB. SAM CLI enables local development, testing, and deployment to AWS with ease.
 
 ## Table of Contents
 - 1.[Building Your First Serverless API with SAM](./SAM/Lab1/README.md)
