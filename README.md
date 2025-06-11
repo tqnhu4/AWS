@@ -15,4 +15,7 @@ This repository is structured into two main sections: **Lessons** and **Labs**.
 - Labs follow a step-by-step format to ensure clarity and repeatability.
 - Include cleanup steps to prevent unnecessary AWS charges.
 
+## [🧪 Projects](./Projects/README.md)
+
+
 👉 Start with the **Lessons** to build your understanding, then move on to the **Labs** to apply your knowledge in real-world scenarios.
