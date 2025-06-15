@@ -3,6 +3,34 @@
 
 Welcome to a practical project that will help you get familiar with AWS\! Here's a step-by-step guide to deploying a highly available web server system.
 
+
+## 🎯 Objective
+Build a highly available website by evenly distributing traffic across multiple EC2 instances using an **Application Load Balancer (ALB)**.
+
+## 📘 Skills Gained
+- Fundamentals of **Application Load Balancer (ALB)**: listener, target group, health check.
+- EC2 **Auto Scaling** configuration.
+- *(Optional)* Using **Route 53** to assign a custom domain.
+
+## 🛠️ Technologies & AWS Services
+- **EC2**
+- **Application Load Balancer (ALB)**
+- **Auto Scaling Group**
+- **Launch Template**
+- **Security Group**
+- *(Optional)* **Route 53**
+
+## 📝 Description
+
+1. Launch **2 EC2 instances** (with Nginx or Apache web servers installed).
+2. Configure an **Application Load Balancer** to distribute incoming traffic to the EC2 instances.
+3. Set up an **Auto Scaling Group** to ensure a minimum of 2 instances are always running.
+4. *(Optional)* Assign a custom domain to the ALB using **Route 53**.
+
+---
+
+
+
 ### 📝 Overview of Steps:
 
 1.  **Preparation:** Log in to the AWS Console, select a Region.
