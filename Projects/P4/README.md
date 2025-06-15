@@ -279,4 +279,3 @@ To avoid incurring unnecessary costs, clean up the resources you created after c
       * Select `web-server-sg` and `web-alb-sg`.
       * Click "**Actions**" -\> "**Delete security group**". (You might need to delete the ALB SG first, then the EC2 SG if there are dependency errors).
 
-Congratulations on completing this project\! If you have any questions during the process, don't hesitate to ask.
