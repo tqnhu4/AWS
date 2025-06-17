@@ -3,7 +3,7 @@
 
 This project guides you through deploying a microservices architecture on AWS using ECS Fargate, with an Application Load Balancer (ALB) to route traffic based on URL paths.
 
-### Learning Objectives 🧠
+### 🧠 Learning Objectives 
 
 By completing this project, you will gain hands-on experience with:
 
@@ -21,7 +21,7 @@ By completing this project, you will gain hands-on experience with:
 * **Amazon CloudWatch**: Monitoring and observability service.
 * **Amazon Virtual Private Cloud (VPC)**: Logically isolated section of the AWS Cloud.
 
-### Project Description 📝
+### 📝 Project Description 
 
 You will set up an infrastructure that supports three distinct microservices: `auth`, `order`, and `product`. Each service will run as an independent ECS Fargate service, and an ALB will handle the routing of requests to the correct service based on the URL path.
 
@@ -37,9 +37,9 @@ You will set up an infrastructure that supports three distinct microservices: `a
 
 ---
 
-### Step-by-Step Guide 🚀
+### 🚀 Step-by-Step Guide 
 
-#### 1. Prepare Your Microservices and Push to ECR 🐳
+#### 🐳 1. Prepare Your Microservices and Push to ECR 
 
 For this project, you'll need three simple web applications that respond to HTTP requests. For demonstration purposes, they can be basic "Hello World" applications that indicate which service they are (e.g., "Hello from Auth Service").
 
@@ -99,7 +99,7 @@ For this project, you'll need three simple web applications that respond to HTTP
 
 ---
 
-#### 2. Configure ECS Cluster and Task Definitions ⚙️
+#### ⚙️ 2. Configure ECS Cluster and Task Definitions 
 
 1.  **Create an ECS Cluster**:
     * Go to **ECS** in the AWS Console.
@@ -141,7 +141,7 @@ For this project, you'll need three simple web applications that respond to HTTP
 
 ---
 
-#### 3. Create Application Load Balancer (ALB) and Target Groups ⚖️
+#### ⚖️ 3. Create Application Load Balancer (ALB) and Target Groups 
 
 1.  **Create Target Groups**: You'll need a separate target group for each microservice.
 
@@ -175,7 +175,7 @@ For this project, you'll need three simple web applications that respond to HTTP
 
 ---
 
-#### 4. Deploy ECS Fargate Services 📦
+#### 📦 4. Deploy ECS Fargate Services 
 
 Now, link your task definitions to the ALB and deploy them as ECS services.
 
@@ -202,7 +202,7 @@ Now, link your task definitions to the ALB and deploy them as ECS services.
 
 ---
 
-#### 5. Configure ALB Path-Based Routing Rules ➡️
+#### ➡️ 5. Configure ALB Path-Based Routing Rules 
 
 Once your ECS services are running and registered with their respective target groups, configure the ALB to route traffic.
 
@@ -233,7 +233,7 @@ Once your ECS services are running and registered with their respective target g
 
 ---
 
-#### 6. Verify and Test ✅
+#### ✅ 6. Verify and Test 
 
 1.  **Get ALB DNS Name**:
     * Go to **EC2** -> **Load Balancers**.
@@ -254,7 +254,7 @@ Once your ECS services are running and registered with their respective target g
 
 ---
 
-### Cleanup 🧹
+### 🧹 Cleanup 
 
 To avoid incurring charges, remember to clean up all the resources you've created:
 
