@@ -12,3 +12,6 @@ This repository contains guides and resources for various projects I'm undertaki
 - [Deploying a High Availability (HA) Web Server with ALB + EC2 (Beginner Level)](./P4/README.md)
 
 - [Microservices Infrastructure with ALB + ECS Fargate](./P5/README.md)
+
+- [Automated CI/CD Blue/Green Deployment with ALB + CodeDeploy + ECS (Advanced)](./P6/README.md)
+
