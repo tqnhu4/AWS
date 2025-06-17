@@ -3,6 +3,8 @@
 
 This project guides you through setting up an automated Continuous Integration/Continuous Deployment (CI/CD) pipeline for your microservices using a **Blue/Green deployment strategy** with AWS services. This advanced setup ensures minimal downtime during application updates by shifting traffic between two distinct environments (Blue for the old version, Green for the new).
 
+---
+
 ### 🧠 Learning Objectives 
 
 By completing this project, you will master:
@@ -26,7 +28,15 @@ By completing this project, you will master:
 
 ### 📝 Project Description 
 
-You will set up a robust CI/CD pipeline that automates the entire software release process. When a new code commit is made, CodePipeline will trigger a build, push a new Docker image, and then use CodeDeploy to perform a **Blue/Green deployment** on your ECS Fargate service. This involves spinning up a new "Green" environment, shifting traffic from the existing "Blue" environment to "Green," and then, upon successful verification, terminating the old "Blue" environment. The project also covers how to observe and potentially trigger a **rollback** in case of deployment failures.
+This project involves setting up a pipeline to:
+
+* **Build the application and push the image to ECR using CodeBuild.**
+* **Have CodePipeline fetch the new image and deploy it via CodeDeploy.**
+* **Utilize CodeDeploy for a Blue/Green strategy, which includes:**
+    * Creating new ECS tasks.
+    * Shifting traffic from the old version to the new version by changing the Target Group in the ALB.
+    * Testing rollback scenarios in case of deployment failures.
+
 
 **High-Level Steps:**
 
