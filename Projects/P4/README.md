@@ -30,7 +30,7 @@ Build a highly available website by evenly distributing traffic across multiple 
 ---
 
 
-
+<div style="background-color: #f0f8ff; padding: 10px; border-radius: 8px;">
 ### 📝 Overview of Steps:
 
 1.  **Preparation:** Log in to the AWS Console, select a Region.
@@ -42,7 +42,7 @@ Build a highly available website by evenly distributing traffic across multiple 
 7.  **Test:** Access the website via the ALB DNS.
 8.  **(Optional) Configure Route 53:** Map a custom domain to the ALB.
 9.  **Clean Up Resources:** Delete the created resources.
-
+</div>
 -----
 
 ### 🛠️ Let's Start Deploying:
