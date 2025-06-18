@@ -30,9 +30,9 @@ Build a highly available website by evenly distributing traffic across multiple 
 ---
 
 
-<div style="background-color: #f0f8ff; padding: 10px; border-radius: 8px;">
-### 📝 Overview of Steps:
 
+### 📝 Overview of Steps:
+<div style="background-color: #f0f8ff; padding: 10px; border-radius: 8px;">
 1.  **Preparation:** Log in to the AWS Console, select a Region.
 2.  **Create Security Groups:** Allow HTTP/HTTPS access to EC2 and ALB.
 3.  **Create Launch Template:** Define EC2 instance configuration (AMI, instance type, web server installation script).
