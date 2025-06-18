@@ -32,7 +32,6 @@ Build a highly available website by evenly distributing traffic across multiple 
 
 
 ### 📝 Overview of Steps:
-<div style="background-color: #f0f8ff; padding: 10px; border-radius: 8px;">
 1.  **Preparation:** Log in to the AWS Console, select a Region.
 2.  **Create Security Groups:** Allow HTTP/HTTPS access to EC2 and ALB.
 3.  **Create Launch Template:** Define EC2 instance configuration (AMI, instance type, web server installation script).
@@ -42,7 +41,7 @@ Build a highly available website by evenly distributing traffic across multiple 
 7.  **Test:** Access the website via the ALB DNS.
 8.  **(Optional) Configure Route 53:** Map a custom domain to the ALB.
 9.  **Clean Up Resources:** Delete the created resources.
-</div>
+
 -----
 
 ### 🛠️ Let's Start Deploying:
