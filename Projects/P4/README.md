@@ -55,6 +55,22 @@ Build a highly available website by evenly distributing traffic across multiple 
 
 We'll need two **Security Groups**: one for the **ALB** and one for the **EC2 instances**.
 
+  * **Security Group for ALB:**
+
+    1.  Click "**Create security group**" again.
+    2.  **Security group name:** `web-alb-sg`
+    3.  **Description:** `Allow HTTP/HTTPS traffic to ALB`
+    4.  **VPC:** Select the same VPC as the EC2 SG.
+    5.  **Inbound rules:**
+          * Click "**Add rule**".
+          * **Type:** `HTTP`
+          * **Source:** `Anywhere-IPv4` (`0.0.0.0/0`)
+          * Click "**Add rule**" again.
+          * **Type:** `HTTPS`
+          * **Source:** `Anywhere-IPv4` (`0.0.0.0/0`)
+    6.  **Outbound rules:** Keep default.
+    7.  Click "**Create security group**".
+
   * **Security Group for EC2 Instances:**
 
     1.  In the AWS Console, search for "**EC2**" and click it.
@@ -76,21 +92,6 @@ We'll need two **Security Groups**: one for the **ALB** and one for the **EC2 in
     8.  **Outbound rules:** Keep default (Allow all traffic).
     9.  Click "**Create security group**".
 
-  * **Security Group for ALB:**
-
-    1.  Click "**Create security group**" again.
-    2.  **Security group name:** `web-alb-sg`
-    3.  **Description:** `Allow HTTP/HTTPS traffic to ALB`
-    4.  **VPC:** Select the same VPC as the EC2 SG.
-    5.  **Inbound rules:**
-          * Click "**Add rule**".
-          * **Type:** `HTTP`
-          * **Source:** `Anywhere-IPv4` (`0.0.0.0/0`)
-          * Click "**Add rule**" again.
-          * **Type:** `HTTPS`
-          * **Source:** `Anywhere-IPv4` (`0.0.0.0/0`)
-    6.  **Outbound rules:** Keep default.
-    7.  Click "**Create security group**".
 
 #### Step 3: 🚀 Create Launch Template
 
@@ -134,6 +135,17 @@ A **Launch Template** defines how **EC2 instances** will be configured when an *
     systemctl enable nginx
     echo "<h1>Hello from Nginx on $(hostname -f)</h1>" > /usr/share/nginx/html/index.html
     ```
+
+    or Ubuntu
+
+    ```bash
+    #!/bin/bash
+    apt update -y
+    apt install nginx -y
+    systemctl start nginx
+    systemctl enable nginx
+    echo "<h1>Hello from Nginx on $(hostname -f)</h1>" | sudo tee /var/www/html/index.html > /dev/null   
+    ``` 
 
     **Script for Apache (httpd):**
 
