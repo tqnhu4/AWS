@@ -9,7 +9,7 @@ This repository contains guides and resources for various projects I'm undertaki
 
  - 3.[Packing up & Restoring EC2 Servers - create EC2 instance -> create a text file inside save some text.. Replicate the instance and observe the same text in the new instance.](./3.Packing-Up-and-Restoring-EC2-Servers.md)
 
- - 4.[Deploying a High Availability (HA) Web Server with ALB + EC2 (Beginner Level)](./4.Web-Server-with-ALB-EC2 .md)
+ - 4.[Deploying a High Availability (HA) Web Server with ALB + EC2 (Beginner Level)](./4.Web-Server-with-ALB-EC2.md)
 
  - 5.[Microservices Infrastructure with ALB + ECS Fargate](./5.Microservices-Infrastructure-with-ALB-ECS-Fargate.md)
 
