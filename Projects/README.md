@@ -4,14 +4,13 @@ This repository contains guides and resources for various projects I'm undertaki
 
 ## Table of Contents
 
-- [Deploy Wordpress server on EC2 ==> Tech stack: EC2, Linux, MySQL, IAM Security Groups](./P1/README.md)
-- [Manupulating AWS resources using CLI - Create two S3 buckets, Upload files in one bucket, Use CLI to copy from that bucket to the other ==> AWS CLI, S3](./P2/README.md)
+ - 1.[Deploy Wordpress server on EC2 ==> Tech stack: EC2, Linux, MySQL, IAM Security Groups](./1.WordPress-Server-on-EC2.md)
+ - 2.[Manupulating AWS resources using CLI - Create two S3 buckets, Upload files in one bucket, Use CLI to copy from that bucket to the other ==> AWS CLI, S3](./2.AWS-CLI-S3.md)
 
-- [Packing up & Restoring EC2 Servers - create EC2 instance -> create a text file inside save some text.. Replicate the instance and observe the same text in the new instance.](./P3/README.md)
+ - 3.[Packing up & Restoring EC2 Servers - create EC2 instance -> create a text file inside save some text.. Replicate the instance and observe the same text in the new instance.](./3.Packing-Up-and-Restoring-EC2-Servers.md)
 
-- [Deploying a High Availability (HA) Web Server with ALB + EC2 (Beginner Level)](./P4/README.md)
+ - 4.[Deploying a High Availability (HA) Web Server with ALB + EC2 (Beginner Level)](./4.Web-Server-with-ALB-EC2 .md)
 
-- [Microservices Infrastructure with ALB + ECS Fargate](./P5/README.md)
+ - 5.[Microservices Infrastructure with ALB + ECS Fargate](./5.Microservices-Infrastructure-with-ALB-ECS-Fargate.md)
 
-- [Automated CI/CD Blue/Green Deployment with ALB + CodeDeploy + ECS (Advanced)](./P6/README.md)
-
+ - 6.[Automated CI/CD Blue/Green Deployment with ALB + CodeDeploy + ECS (Advanced)](./6.Automated-CICD-BlueGreen-Deployment-with-ALB-CodeDeploy-ECS.md)
