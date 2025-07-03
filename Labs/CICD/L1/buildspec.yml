@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Nothing to install.
+  build:
+    commands:
+      - echo Building... No complex build needed for static files.
+  post_build:
+    commands:
+      - echo Build completed.
+artifacts:
+  files:
+    - '**/*' # Include all files in the artifact
