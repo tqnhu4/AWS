@@ -1,0 +1,24 @@
+# template.yaml
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: A simple CloudFormation template to create an S3 bucket for the 'Hello CloudFormation' exercise.
+
+Resources:
+  MyFirstS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      # Optional: You can specify a unique bucket name.
+      # If not specified, CloudFormation will generate a unique name for you.
+      # BucketName: my-unique-cloudformation-bucket-12345
+      Tags:
+        - Key: Project
+          Value: HelloCloudFormation
+        - Key: Environment
+          Value: Dev
+
+Outputs:
+  BucketName:
+    Description: The name of the S3 bucket created by this stack.
+    Value: !Ref MyFirstS3Bucket
+    Export:
+      Name: MyFirstS3BucketName

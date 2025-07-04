@@ -1,0 +1,86 @@
+# template.yaml
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: A CloudFormation template to create an EC2 instance with a custom Security Group allowing SSH and HTTP traffic.
+
+Parameters:
+  AmiId:
+    Description: The Amazon Machine Image (AMI) ID for the EC2 instance.
+    Type: String
+    Default: ami-080e1f37e45293bb8 # Default for Amazon Linux 2023 (t2.micro/t3.micro compatible) in us-east-1. ALWAYS VERIFY FOR YOUR REGION!
+    AllowedPattern: "^ami-[0-9a-fA-F]{8,17}$"
+    ConstraintDescription: Must be a valid AMI ID (e.g., ami-0abcdef1234567890).
+
+  InstanceType:
+    Description: The EC2 instance type.
+    Type: String
+    Default: t2.micro # Common free-tier eligible instance type
+    AllowedValues:
+      - t2.micro
+      - t3.micro
+      - t3a.micro
+    ConstraintDescription: Must be a valid EC2 instance type.
+
+  SshLocation: # New parameter for SSH source IP
+    Description: The IP address range that can SSH to the EC2 instance (CIDR notation).
+    Type: String
+    MinLength: 9
+    MaxLength: 18
+    Default: 0.0.0.0/0 # WARNING: This allows SSH from anywhere. Restrict for production!
+    AllowedPattern: "^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/([0-9]|[1-2][0-9]|3[0-2]))?$"
+    ConstraintDescription: Must be a valid IP CIDR range.
+
+Resources:
+  # --- New: Security Group Resource ---
+  EC2SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: !Sub '${AWS::StackName}-SecurityGroup'
+      GroupDescription: Enable SSH access on port 22 and HTTP access on port 80.
+      SecurityGroupIngress: # Inbound rules
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: !Ref SshLocation # Allows SSH from the specified SshLocation parameter
+          Description: Allow SSH access
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0 # WARNING: Allows HTTP from anywhere.
+          Description: Allow HTTP access
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-SG'
+        - Key: Project
+          Value: CloudFormationExercises
+
+  # --- Existing: EC2 Instance Resource (Modified) ---
+  MySimpleEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref AmiId
+      InstanceType: !Ref InstanceType
+      # Highlighted change: Attach the Security Group
+      SecurityGroupIds:
+        - !Ref EC2SecurityGroup # Referencing the logical ID of our new Security Group
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-MySimpleEC2'
+        - Key: Project
+          Value: CloudFormationExercises
+        - Key: Environment
+          Value: Development
+
+Outputs:
+  InstanceId:
+    Description: The ID of the created EC2 instance.
+    Value: !Ref MySimpleEC2Instance
+  PublicIp:
+    Description: The public IP address of the EC2 instance.
+    Value: !GetAtt MySimpleEC2Instance.PublicIp
+  PrivateIp:
+    Description: The private IP address of the EC2 instance.
+    Value: !GetAtt MySimpleEC2Instance.PrivateIp
+  SecurityGroupId: # New output
+    Description: The ID of the created Security Group.
+    Value: !Ref EC2SecurityGroup

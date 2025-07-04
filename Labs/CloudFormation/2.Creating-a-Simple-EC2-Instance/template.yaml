@@ -1,0 +1,47 @@
+# template.yaml
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: A CloudFormation template to create a simple EC2 instance (Amazon Linux).
+
+Parameters:
+  AmiId:
+    Description: The Amazon Machine Image (AMI) ID for the EC2 instance.
+    Type: String
+    Default: ami-080e1f37e45293bb8 # Default for Amazon Linux 2023 (t2.micro/t3.micro compatible) in us-east-1 as of early 2025. ALWAYS VERIFY THE LATEST AMI ID FOR YOUR REGION!
+    AllowedPattern: "^ami-[0-9a-fA-F]{8,17}$"
+    ConstraintDescription: Must be a valid AMI ID (e.g., ami-0abcdef1234567890).
+
+  InstanceType:
+    Description: The EC2 instance type.
+    Type: String
+    Default: t2.micro # Common free-tier eligible instance type
+    AllowedValues:
+      - t2.micro
+      - t3.micro
+      - t3a.micro
+    ConstraintDescription: Must be a valid EC2 instance type.
+
+Resources:
+  MySimpleEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref AmiId # Use the AMI ID from the Parameters section
+      InstanceType: !Ref InstanceType # Use the Instance Type from the Parameters section
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-MySimpleEC2' # Dynamic Name based on Stack Name
+        - Key: Project
+          Value: CloudFormationExercises
+        - Key: Environment
+          Value: Development
+
+Outputs:
+  InstanceId:
+    Description: The ID of the created EC2 instance.
+    Value: !Ref MySimpleEC2Instance
+  PublicIp:
+    Description: The public IP address of the EC2 instance.
+    Value: !GetAtt MySimpleEC2Instance.PublicIp
+  PrivateIp:
+    Description: The private IP address of the EC2 instance.
+    Value: !GetAtt MySimpleEC2Instance.PrivateIp
