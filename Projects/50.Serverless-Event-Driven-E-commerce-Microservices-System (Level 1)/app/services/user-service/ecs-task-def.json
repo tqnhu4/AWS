@@ -1,0 +1,142 @@
+{
+    "compatibilities": [
+        "EC2",
+        "MANAGED_INSTANCES",
+        "FARGATE"
+    ],
+    "containerDefinitions": [
+        {
+            "cpu": 0,
+            "environment": [
+                {
+                    "name": "SERVICE_NAME",
+                    "value": "user-service"
+                },
+                {
+                    "name": "AWS_REGION",
+                    "value": "us-east-1"
+                },
+                {
+                    "name": "EVENT_QUEUE_URL",
+                    "value": "https://sqs.us-east-1.amazonaws.com/218496845315/dev-post-user-created"
+                },
+                {
+                    "name": "PORT",
+                    "value": "3002"
+                },
+                {
+                    "name": "DB_PORT",
+                    "value": "5432"
+                },
+                {
+                    "name": "CLOUD",
+                    "value": "aws"
+                },
+                {
+                    "name": "DB_USER",
+                    "value": "postgres"
+                },
+                {
+                    "name": "EVENT_BUS_DRIVER",
+                    "value": "aws"
+                },
+                {
+                    "name": "DB_NAME",
+                    "value": "userdb"
+                },
+                {
+                    "name": "DB_HOST",
+                    "value": "userdb.cibk4mc0s39f.us-east-1.rds.amazonaws.com"
+                },
+                {
+                    "name": "EVENT_BUS_NAME",
+                    "value": "dev-micro-event-bus"
+                },
+                {
+                    "name": "CLOUDMAP_SERVICE_ID",
+                    "value": "srv-tlczaqgslhdgmz3w"
+                },
+                {
+                    "name": "DB_PASSWORD",
+                    "value": "postgres"
+                }
+            ],
+            "essential": true,
+            "image": "218496845315.dkr.ecr.us-east-1.amazonaws.com/user-service:latest",
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/user-service-task",
+                    "awslogs-create-group": "true",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            },
+            "mountPoints": [],
+            "name": "user-service-container",
+            "portMappings": [
+                {
+                    "appProtocol": "http",
+                    "containerPort": 3002,
+                    "hostPort": 3002,
+                    "name": "3002",
+                    "protocol": "tcp"
+                }
+            ],
+            "systemControls": [],
+            "volumesFrom": []
+        }
+    ],
+    "cpu": "1024",
+    "enableFaultInjection": false,
+    "executionRoleArn": "arn:aws:iam::218496845315:role/ecsTaskExecutionRole",
+    "family": "user-service-task",
+    "memory": "2048",
+    "networkMode": "awsvpc",
+    "placementConstraints": [],
+    "registeredAt": "2025-12-26T06:50:05.058Z",
+    "registeredBy": "arn:aws:iam::218496845315:root",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.task-iam-role"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+        }
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "revision": 24,
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "status": "ACTIVE",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:218496845315:task-definition/user-service-task:24",
+    "taskRoleArn": "arn:aws:iam::218496845315:role/ecsTaskRole",
+    "volumes": [],
+    "tags": []
+}

@@ -1,0 +1,95 @@
+name: CI/CD to Amazon ECS (Post Service)
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🧩 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔐 Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}   
+
+      - name: 🐳 Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: ⚙️ Build, tag, and push image to ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
+          ECR_GITHUB_TOKEN: ${{ secrets.ECR_GITHUB_TOKEN }}
+        run: |
+          docker build --build-arg GITHUB_TOKEN=$ECR_GITHUB_TOKEN -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
+      - name: 🧾 Render Amazon ECS task definition
+        id: render-task
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ecs-task-def.json
+          container-name: post-service-container
+          image: ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY }}:latest
+
+      - name: 🚀 Deploy to Amazon ECS
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.render-task.outputs.task-definition }}
+          service: ${{ secrets.ECS_SERVICE }}
+          cluster: ${{ secrets.ECS_CLUSTER }}
+          wait-for-service-stability: true
+
+      - name: 🧭 Register service instance to Cloud Map
+        run: |
+          echo "Fetching ECS task metadata..."
+
+          CLUSTER=${{ secrets.ECS_CLUSTER }}
+          SERVICE=${{ secrets.ECS_SERVICE }}
+          PORT=${{ secrets.ECS_PORT }}
+          #SERVICE_ID=${{ env.SERVICE_ID }}
+
+          SERVICE_ID=$(aws servicediscovery list-services --query "Services[?Name=='$SERVICE'].Id" --output text)
+          echo "SERVICE_ID=$SERVICE_ID" >> $GITHUB_ENV          
+
+          # Get the latest running task
+          TASK_ARN=$(aws ecs list-tasks \
+              --cluster $CLUSTER \
+              --service-name $SERVICE \
+              --desired-status RUNNING \
+              --query "taskArns[0]" --output text)
+
+          echo "TASK_ARN=$TASK_ARN"
+
+          echo "Instance Id: $(basename $TASK_ARN)"
+
+          # Extract private IP and port
+          IP=$(aws ecs describe-tasks \
+              --cluster $CLUSTER --tasks $TASK_ARN \
+              --query "tasks[0].attachments[0].details[?name=='privateIPv4Address'].value" \
+              --output text)
+
+          #PORT=$(aws ecs describe-tasks \
+          #    --cluster $CLUSTER --tasks $TASK_ARN \
+          #    --query "tasks[0].containers[0].networkBindings[0].containerPort" \
+          #    --output text)
+
+          #echo "Port: $PORT"
+
+          VERSION=${{ github.sha }}
+          
+          
+          echo "Registering instance in Cloud Map..."
+          aws servicediscovery register-instance \
+            --service-id $SERVICE_ID \
+            --instance-id $(basename $TASK_ARN) \
+            --attributes "AWS_INSTANCE_IPV4=$IP,AWS_INSTANCE_PORT=$PORT,APP_VERSION=$VERSION"
+                              

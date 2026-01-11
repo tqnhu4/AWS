@@ -1,0 +1,26 @@
+const AWS = require("aws-sdk");
+const eventBridge = new AWS.EventBridge({
+    region: process.env.AWS_REGION,
+});
+
+const eventBus = {
+  publish: async (detailType, detail) => {
+    await eventBridge
+      .putEvents({
+        Entries: [
+          {
+            Source: process.env.SERVICE_NAME,
+            DetailType: detailType,
+            Detail: JSON.stringify(detail),
+            EventBusName: process.env.EVENT_BUS_NAME,
+          },
+        ],
+      })
+      .promise();
+  },
+  subscribe: () => {
+    // At AWS, Post service will receive from Lambda, donot “subscribe” directly
+  },
+};
+
+module.exports = eventBus;

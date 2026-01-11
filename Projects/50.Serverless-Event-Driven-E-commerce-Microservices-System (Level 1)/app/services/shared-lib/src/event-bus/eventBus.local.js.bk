@@ -1,0 +1,29 @@
+
+const { createClient } = require("redis");
+
+const redisUrl = process.env.REDIS_URL || "redis://localhost:6379";
+
+// Publisher
+const publisher = createClient({ url: redisUrl });
+publisher.connect();
+
+// Subscriber
+const subscriber = createClient({ url: redisUrl });
+subscriber.connect();
+
+const eventBus = {
+  publish: async (channel, message) => {
+    console.log("[RedisBus] Publishing:", channel, message);
+    await publisher.publish(channel, JSON.stringify(message));
+  },
+
+  subscribe: async (channel, handler) => {
+    await subscriber.subscribe(channel, (msg) => {
+      const data = JSON.parse(msg);
+      console.log("[RedisBus] Received:", channel, data);
+      handler(data);
+    });
+  }
+};
+
+module.exports = eventBus;
