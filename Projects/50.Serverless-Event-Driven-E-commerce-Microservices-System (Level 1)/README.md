@@ -67,6 +67,6 @@ Design a simple Blog platform (users → posts) using a Microservices architectu
 
 * Each service has its own deployment pipeline
 * Typical pipeline: **Github Action → ECR → ECS Deploy**
-* Use `Infrastructure as Code` with **AWS CloudFormation / Terraform**
+
 
 ---
